@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
+import Axios from "../utils/axios";
 
 const UserContext = createContext();
 
@@ -34,7 +35,7 @@ export const UserProvider = ({ children }) => {
   async function loginUser(email, password, naviagte, fetchPins) {
     setBtnLoading(true);
     try {
-      const { data } = await axios.post("/api/user/login", { email, password });
+      const { data } = await Axios.post("/api/user/login", { email, password });
       toast.success(data.message);
       setUser(data.user);
       setIsAuth(true);

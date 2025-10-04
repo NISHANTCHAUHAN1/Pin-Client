@@ -3,7 +3,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 // import Axios from "../axios";
-import axios from "axios";
+// import axios from "axios";
+import Axios from "../utils/axios";
 
 const PinContext = createContext();
 
@@ -14,7 +15,7 @@ export const PinProvider = ({ children }) => {
   // hame bar bar ab page refresh karne ki jarurt nahi padegi fetchpins ki whaja se
   async function fetchPins() {
     try {
-      const { data } = await axios.get("/api/pin/all");
+      const { data } = await Axios.get("/api/pin/all");
       setPins(data);
       setLoading(false);
     } catch (error) {
