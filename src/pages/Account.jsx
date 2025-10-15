@@ -1,6 +1,6 @@
 import React from "react";
 import { pinData } from "../context/pinContext";
-import Axios from "../utils/axios";
+import axios from "../utils/Axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserData } from "../context/UserContext";
@@ -17,7 +17,7 @@ const Account = ({ user }) => {
 
   const logoutHandler = async () => {
     try {
-      const { data } = await Axios.get("/api/user/logout");
+      const { data } = await axios.get("/api/user/logout");
       toast.success(data.message);
       navigate("/login");
       setIsAuth(false);

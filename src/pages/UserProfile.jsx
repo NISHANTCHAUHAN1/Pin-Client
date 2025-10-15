@@ -1,9 +1,9 @@
-import Axios from "../utils/axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { pinData } from "../context/pinContext";
 import PinCard from "../components/PinCard";
 import { UserData } from "../context/UserContext";
+import axios from "../utils/Axios";
 
 const UserProfile = ({ user: loggedInUser }) => {
   const params = useParams();
@@ -25,7 +25,7 @@ const UserProfile = ({ user: loggedInUser }) => {
 
   async function fetchUser() {
     try {
-      const { data } = await Axios.get(`/api/user/${params.id}`);
+      const { data } = await axios.get(`/api/user/${params.id}`);
       setUser(data);
     } catch (error) {
       console.log(error);
@@ -75,14 +75,6 @@ const UserProfile = ({ user: loggedInUser }) => {
                 </button>
               </div>
             )}
-
-            {/* <div className="mt-4 flex flex-wrap justify-center gap-4">
-              {userPins && userPins.length > 0 ? (
-                userPins.map((e) => <PinCard key={e._id} pin={e} />)
-              ) : (
-                <p>No Pin Yet</p>
-              )}
-            </div> */}
 
             <div className="mt-4 flex flex-wrap justify-center gap-4">
               {userPins && userPins.length > 0 ? (

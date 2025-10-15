@@ -143,11 +143,7 @@ const PinPage = ({ user }) => {
                 )}
 
                 <div className="flex items-center mt-4">
-                  {/* <div className="rounded-full h-12 w-12 bg-gray-300 flex items-center justify-center mr-4">
-                    <span className="font-bold w-11 h-6 text-center">
-                      {pin.owner && pin.owner.name.slice(0, 1)}
-                    </span>
-                  </div> */}
+                  
                   <form className="flex-1 flex" onSubmit={sumbitHandler}>
                     <input
                       type="text"
