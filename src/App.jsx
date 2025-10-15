@@ -18,7 +18,6 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate a network request or delay
     setTimeout(() => {
       setIsLoading(false);
     }, 3000); // 3 seconds delay
