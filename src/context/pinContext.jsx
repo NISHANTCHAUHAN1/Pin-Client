@@ -1,10 +1,6 @@
-// import axios from "axios";
-// import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-// import Axios from "../axios";
-// import axios from "axios";
-import Axios from "../utils/axios";
+import axios from "../utils/Axios";
 
 const PinContext = createContext();
 
@@ -15,8 +11,8 @@ export const PinProvider = ({ children }) => {
   // hame bar bar ab page refresh karne ki jarurt nahi padegi fetchpins ki whaja se
   async function fetchPins() {
     try {
-      const { data } = await Axios.get("/api/pin/all");
-      setPins(data);
+      const res = await axios.get("/api/pin/all");
+      setPins(res.data || []);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -27,7 +23,7 @@ export const PinProvider = ({ children }) => {
     fetchPins();
   }, []);
 
-  const [pin, setPin] = useState([]);
+  const [pin, setPin] = useState(null);
   async function fetchPin(id) {
     setLoading(true);
     try {
@@ -45,10 +41,10 @@ export const PinProvider = ({ children }) => {
     try {
       const { data } = await axios.put("/api/pin/" + id, { title, pin });
       toast.success(data.message);
-      fetchPin(id);
+      await fetchPin(id);
       setEdit(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
     }
   }
   // commnet add
@@ -56,10 +52,10 @@ export const PinProvider = ({ children }) => {
     try {
       const { data } = await axios.post("/api/pin/comment/" + id, { comment });
       toast.success(data.message);
-      fetchPin(id);
+      await fetchPin(id);
       setComment("");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
     }
   }
 
@@ -70,9 +66,9 @@ export const PinProvider = ({ children }) => {
         `/api/pin/comment/${id}?commentId=${commentId}`
       );
       toast.success(data.message);
-      fetchPin(id);
+      await fetchPin(id);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
     }
   }
 
@@ -84,9 +80,9 @@ export const PinProvider = ({ children }) => {
       toast.success(data.message);
       navigate("/");
       setLoading(false);
-      fetchPins();
+      await fetchPins();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
       setLoading(false);
     }
   }
@@ -107,10 +103,10 @@ export const PinProvider = ({ children }) => {
       setFilePrev("");
       setPin("");
       setTitle("");
-      fetchPins();
+      await fetchPins();
       navigate("/");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
     }
   }
 

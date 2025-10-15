@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import axios from "axios";
-import Axios from "../utils/axios";
+import axios from "../utils/Axios";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
 
@@ -20,13 +19,13 @@ export const UserProvider = ({ children }) => {
         password,
       });
       toast.success(data.message);
-      setUser(user);
+      setUser(data.user);
       setIsAuth(true);
       setBtnLoading(false);
       naviagte("/");
       fetchPins();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
       setBtnLoading(false);
     }
   }
@@ -35,7 +34,7 @@ export const UserProvider = ({ children }) => {
   async function loginUser(email, password, naviagte, fetchPins) {
     setBtnLoading(true);
     try {
-      const { data } = await Axios.post("/api/user/login", { email, password });
+      const { data } = await axios.post("/api/user/login", { email, password });
       toast.success(data.message);
       setUser(data.user);
       setIsAuth(true);
@@ -43,7 +42,7 @@ export const UserProvider = ({ children }) => {
       naviagte("/");
       fetchPins();
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || error.message || "Something went wrong");
       setBtnLoading(false);
     }
   }
