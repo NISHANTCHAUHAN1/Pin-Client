@@ -17,7 +17,7 @@ const Account = ({ user }) => {
 
   const logoutHandler = async () => {
     try {
-      const { data } = await axios.get("/api/user/logout");
+      const { data } = await axios.get("/api/user/logout", {withCredentials:true});
       toast.success(data.message);
       navigate("/login");
       setIsAuth(false);

@@ -25,7 +25,7 @@ const UserProfile = ({ user: loggedInUser }) => {
 
   async function fetchUser() {
     try {
-      const { data } = await axios.get(`/api/user/${params.id}`);
+      const { data } = await axios.get(`/api/user/${params.id}`, {withCredentials:true});
       setUser(data);
     } catch (error) {
       console.log(error);
