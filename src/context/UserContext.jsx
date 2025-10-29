@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
         name,
         email,
         password,
-      });
+      },{withCredentials:true});
       toast.success(data.message);
       setUser(data.user);
       setIsAuth(true);
@@ -34,7 +34,7 @@ export const UserProvider = ({ children }) => {
   async function loginUser(email, password, naviagte, fetchPins) {
     setBtnLoading(true);
     try {
-      const { data } = await axios.post("/api/user/login", { email, password });
+      const { data } = await axios.post("/api/user/login", { email, password },{withCredentials:true});
       toast.success(data.message);
       setUser(data.user);
       setIsAuth(true);
@@ -67,7 +67,7 @@ export const UserProvider = ({ children }) => {
   // follow and unfollow
   async function followUser(id, fetchUser) {
     try {
-      const { data } = await axios.post('/api/user/follow/'+ id);
+      const { data } = await axios.post('/api/user/follow/'+ id,{withCredentials:true});
       toast.success(data.message);
       fetchUser();
     } catch (error) {
