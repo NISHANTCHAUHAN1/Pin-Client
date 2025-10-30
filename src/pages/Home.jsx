@@ -44,7 +44,7 @@ const Home = () => {
           <p className="text-sm">
             © 2024 Developed by{" "}
             <Link
-              to="https://nish14.vercel.app/"
+              to="https://nishh3.vercel.app/"
               className="text-blue-500 hover:underline hover:text-blue-700 transition duration-300"
             >
               Nishant
@@ -53,7 +53,7 @@ const Home = () => {
 
           <div className="flex items-center space-x-6 mt-2 md:mt-0">
             <Link
-              to="https://www.linkedin.com/in/nishant-chauhan-b76371255/"
+              to="https://www.linkedin.com/in/nishantchauhan101/"
               className="text-gray-600 hover:text-gray-800 transition-transform duration-300 transform hover:scale-125"
             >
               <FaLinkedin size={24} />
